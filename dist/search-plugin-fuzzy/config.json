@@ -1,0 +1,17 @@
+{
+    "id": "c8763c59-251b-41f8-bb76-65cf54933d03",
+    "type": "search",
+    "author": "John Fuzzy",
+    "allowDomains": [],
+    "changelog": {},
+    "description": "Default fuzzy search plugin",
+    "iconUrl": "http://localhost:8080/dist/search-plugin-fuzzy/icon.png",
+    "name": "Fuzzy Search Plugin",
+    "pluginPublicKey": "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFwSW1mSzdCZTRoZ0l4UCs1anpJZApBTHlHRXFXM0hNV2s2b05qSHRudFdHYktYWGY1VTRiTzZwRTY3eEZvdGhLYmx3VFMxS3ByNG5raVEvcFR5WEtRCmwydEFjY3BjTWRzTTNTWVl1N0hBYmRoT01UenJYZkxxZlFDVDhlSW01QTEvZFc5NHdKVVJtQUl4N3ljcFhVLy8KZkJjMnN6KzJtek5HWUU0OTNpblR3NDExMHdwMVlRTW9kZ3NqY3hHM05obmRGa1VyN2tKVzZFaC9OVndycms5aAplNGtqeDJuQzB6by8wd29sV3NLWTlmMkZxc2c0QTNCa1gyZjMwYUJPS1NGbVFLY2pIMTdkenVsUlVQYllHaVZ5CnNZb3U5NXllYUN4UkwrbDk1ZWI5YXAxdUhVdkZPR29za0EyRnh1Qzh2VWVkZ04wblZjZ1A0R3U4S3RZdWp3YXIKZHdJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==",
+    "pluginSignature": "UPpzSeKzEC5vE31qOKZ0U+BsrvYaNnFEDOBhVL3C9NLV5dRBqR+OQc+IFE/uLoTo4zieJZxz04oGt5zsN0Gmmi66DpG5Y9qv0KSWwVbsxNg4wfWrGluOCs82i/pBGMRACTMvh8DW1BIyxZ7cBCNG21SWXaUJZ/4JNSQBZp47kHTfz1ubq5BCli024Ud4B/iHi/lK0BwXRVx+DyfuVixoLtazNdiNsuKaafBGcZXGMjlYqDwAm2u1idwNmZ3a/rqZ3Ct9m5+S/jcAnvul0nb9ppa877nxg0HA0YY2TZVqjnS8ah0zTPoeuZzjBS0ivcjuKtE8nR3uoR2w3SP0QMWpmg==",
+    "version": 1,
+    "scriptUrl": "http://localhost:8080/dist/search-plugin-fuzzy/index.js",
+    "sourceUrl": "http://localhost:8080/dist/search-plugin-fuzzy/config.json",
+    "authorUrl": "http://192.168.178.21:8080",
+    "repositoryUrl": "http://192.168.178.21:8080"
+}
