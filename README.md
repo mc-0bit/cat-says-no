@@ -162,6 +162,7 @@ Thinking about writing a plugin? Check out [Authoring Plugins](./docs/plugins.md
 - [x] (Security) Add signature validation to plugin updates so plugins can only be updated if the signature is valid.
 - [x] Add documentation for plugins -> [docs](./docs/plugins.md)
 - [x] Add proper styling for reader mode e.g. https://oxal.org/projects/sakura/ -> solved by using tailwind typo
+- [ ] Better default plugins.
 - [ ] Error handling - there are a ton of places where errors cause the whole extension to become unuseable.
 - [ ] logging
 - [ ] Have someone that actually knows crypto look over the implementation + do some code cleanup.
@@ -169,6 +170,7 @@ Thinking about writing a plugin? Check out [Authoring Plugins](./docs/plugins.md
 - [ ] Implement offscreen documents or sandboxed pages for Chrome, and use background pages for Firefox.
 - [ ] Data plugins are currently disabled until offscreen documents or sandboxed pages are implemented.
 - [ ] Figure out how dismissing should behave from a user perspective. For example, if a user is on `youtube.com` and dismisses an alert, they likely want it hidden for that site. However, on a marketplace like Amazon, they probably want to be alerted on all listing pages. Additionally, all matches are currently shown. On Amazon, this means that every product page shows matches related to Amazon in general, not the specific product. There should possibly be an option to ignore specific matches.
+- [ ] Workflows for releases / linting
 
 ## FAQ
 
