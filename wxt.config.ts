@@ -2,6 +2,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'wxt';
 import { createRollupLicensePlugin } from './scripts/util/licenses';
 import fs from 'fs-extra';
+import 'dotenv/config';
 
 let isDevBuild = false;
 
@@ -20,7 +21,7 @@ export default defineConfig({
         openDevtools: true,
         chromiumArgs: ['--auto-open-devtools-for-tabs', '--accept-lang=en-GB', '--lang=en_US'],
         binaries: {
-            chrome: './chrome/win64-138.0.7204.4/chrome-win64/chrome.exe',
+            chrome: process.env.CHROME_PATH ?? '',
         },
     },
     hooks: {

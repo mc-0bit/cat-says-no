@@ -13,6 +13,7 @@
         "zip:firefox": "wxt zip -b firefox",
         "check": "svelte-check --tsconfig ./tsconfig.json",
         "postinstall": "wxt prepare",
+        "install:chrome": "tsx scripts/install-chrome.ts",
         "serve": "npx http-server --base-dir ./dist",
         "bundle:plugin": "tsx scripts/export-plugin.ts",
         "bundle:linkedom": "tsx scripts/export-linkedom/index.ts",
@@ -24,6 +25,7 @@
         "lint:fix": "npm run format && eslint --fix ./src ./scripts ./plugins"
     },
     "devDependencies": {
+        "@puppeteer/browsers": "^2.10.5",
         "@tailwindcss/typography": "^0.5.16",
         "@tsconfig/svelte": "^5.0.4",
         "@types/fs-extra": "^11.0.4",
@@ -37,6 +39,7 @@
         "eslint-config-unjs": "^0.4.2",
         "fs-extra": "^11.3.0",
         "http-server": "^14.1.1",
+        "pathe": "^2.0.3",
         "prettier": "^3.5.3",
         "rollup-plugin-license": "^3.6.0",
         "shiki": "^3.4.2",

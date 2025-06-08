@@ -1,7 +1,5 @@
 # CAT-says-no
 
-Get alerts if the website you are browsing may be linked to an entry on the Consumer Action Taskforce
-
 CAT-says-no is a browser extension that alerts you if the website you're currently visiting may be linked to an article on the Consumer Action Taskforce Wiki. It provides a plugin system that allows the community to extend the supported websites and search logic.
 
 ## Features
@@ -13,7 +11,7 @@ CAT-says-no is a browser extension that alerts you if the website you're current
     - Auto-updating
     - Enable/disable plugins
     - Easily add custom or community-provided plugins
-    - Signature validation for plugin updates (coming soon)
+    - Signature validation for plugin updates
 - Built-in Wiki reader for found entries (powered by Readability.js)
 
 ## Browser Support
@@ -102,13 +100,14 @@ You should see the default plugins listed there.
 Chrome version 137 removed the flag that allowed loading extensions from the command line.  
 [Chrome for Testing](https://developer.chrome.com/blog/chrome-for-testing) is needed now if you don't want to manually install the extension every time.
 
-Install it:
+Install it with the [install-chrome.ts](./scripts/install-chrome.ts) script:
 
 ```bash
-npx @puppeteer/browsers install chrome@stable
+npm run install:chrome
 ```
 
-Replace the Chrome executable path in `wxt.config.ts` with the one downloaded.
+If you wish to install Chrome for testing directly via puppeteer you can run `npx @puppeteer/browsers install chrome@stable` or if you want to manually download it, grab it from the [Chrome for Testing availability dashboard](https://googlechromelabs.github.io/chrome-for-testing/#stable).  
+Make sure to add `CHROME_PATH=<path_to_chrome_executable>` to your `.env` file if you installed it manually.
 
 Bundle `linkedom` once
 
