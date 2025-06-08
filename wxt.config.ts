@@ -18,7 +18,7 @@ export default defineConfig({
     webExt: {
         openConsole: true,
         openDevtools: true,
-        chromiumArgs: ['--auto-open-devtools-for-tabs'],
+        chromiumArgs: ['--auto-open-devtools-for-tabs', '--accept-lang=en-GB', '--lang=en_US'],
         binaries: {
             chrome: './chrome/win64-138.0.7204.4/chrome-win64/chrome.exe',
         },

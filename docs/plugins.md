@@ -6,7 +6,7 @@ See the plugin folder for examples.
 
 ## Flow
 
-![alt text](flow.png)
+![plugin flow](../media/screenshots/plugin-flow.png)
 
 ## Writing a Plugin
 

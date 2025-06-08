@@ -2,7 +2,7 @@
 
 Get alerts if the website you are browsing may be linked to an entry on the Consumer Action Taskforce
 
-CAT-says-NO is a browser extension that alerts you if the website you're currently visiting may be linked to an article on the Consumer Action Taskforce Wiki. It provides a plugin system that allows the community to extend the supported websites and search logic.
+CAT-says-no is a browser extension that alerts you if the website you're currently visiting may be linked to an article on the Consumer Action Taskforce Wiki. It provides a plugin system that allows the community to extend the supported websites and search logic.
 
 ## Features
 
@@ -18,11 +18,17 @@ CAT-says-NO is a browser extension that alerts you if the website you're current
 
 ## Browser Support
 
-| Browser | Status                                             |
-| ------- | -------------------------------------------------- |
+| Browser | Status                                            |
+| ------- | ------------------------------------------------- |
 | Chrome  | ✅ Recommended                                     |
 | Firefox | ⚠️ Partial, experimental                           |
 | Safari  | 🛑 Not supported (community contributions welcome) |
+
+
+## Screenshots
+
+![Extension popup for John Deere](./media/screenshots/john-deere-popup.png)
+![Wiki Reader example](./media/screenshots/wiki-reader.png)
 
 ## Getting started
 
