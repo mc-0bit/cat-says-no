@@ -62,6 +62,13 @@ Clone the repo and install dependencies:
 npm install
 ```
 
+Generate keypair for plugins:
+
+```bash
+npm run generate:keypair
+```
+
+
 Bundle required assets:
 
 ```bash

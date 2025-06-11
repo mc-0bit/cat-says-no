@@ -6,7 +6,7 @@ import crypto from 'node:crypto';
 import 'dotenv/config';
 
 await fs.ensureDir('dist');
-const BASE_PATH = import.meta.env.DEV ? 'http://localhost:8080' : 'https://github.com/mc-0bit/cat-says-no/blob/master/dist/search-plugin-fuzzy';
+const BASE_PATH = process.env.PROD ? 'https://github.com/mc-0bit/cat-says-no/blob/master/dist/search-plugin-fuzzy' : 'http://localhost:8080/dist';
 
 const plugins = fs.readdirSync('plugins');
 

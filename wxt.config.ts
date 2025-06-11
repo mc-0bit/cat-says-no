@@ -46,14 +46,14 @@ export default defineConfig({
         'build:done'() {
             if (isDevBuild) return;
             const licenses = [];
-            for (const file of fs.readdirSync('./tmp/licenses')) {
-                licenses.push(fs.readFileSync(`./tmp/licenses/${file}`));
+            for (const file of fs.readdirSync('./.tmp/licenses')) {
+                licenses.push(fs.readFileSync(`./.tmp/licenses/${file}`));
             }
 
             const deduplicatedLicenses = new Set(licenses);
 
             fs.writeFileSync('./THIRD_PARTY_LICENSES.md', [...deduplicatedLicenses].join('\n\n'));
-            fs.rmSync('./tmp/licenses', { recursive: true });
+            fs.rmSync('./.tmp/licenses', { recursive: true });
         },
     },
     publicDir: 'src/public',

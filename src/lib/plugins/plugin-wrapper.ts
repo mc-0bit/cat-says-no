@@ -1,7 +1,6 @@
 import { Page } from '@/types/api-response';
 import { updatePluginIfOutdated, PluginConfig } from './plugin-config';
 import { MetaData } from './types';
-import { sendMessage } from 'webext-bridge/background';
 import { fetchAllPages } from '../client';
 import { NAMESPACES } from '@/data/namespaces';
 import merge from 'deepmerge';
