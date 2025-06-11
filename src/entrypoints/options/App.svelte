@@ -2,7 +2,7 @@
     import { pluginStore, PREFERENCES, settingStore } from '@/utils/storage';
     import { addPlugin, removePlugin } from '@/lib/plugins/plugin-config';
     import { z } from 'zod/v4-mini';
-    import { excludeDomain, getDomainName, removeDomainExclusion } from '@/lib/helpers';
+    import { excludeDomain, getDomainName, removeDomainExclusion } from '@/lib/helpers/domain';
     import CodeBlock from '@/lib/components/CodeBlock.svelte';
 
     const urlSchema = z.url();
@@ -68,7 +68,7 @@
 <main class="flex w-full items-center">
     <div class="max-w-2xl mx-auto my-8 w-full">
         <div>
-            <h2 class="text-2xl font-bold">Plugins</h2>
+            <h2 class="text-2xl font-bold pb-2">Plugins</h2>
             <ul class="list bg-base-100 rounded-box shadow-md">
                 {#each $pluginStore as plugin}
                     <li class="list-row">
@@ -132,7 +132,7 @@
         </div>
         <p style="color: red">{error || ''}</p>
 
-        <h2 class="text-2xl font-bold">Excluded Domains</h2>
+        <h2 class="text-2xl font-bold pb-2">Excluded Domains</h2>
         <div style="display: flex; flex-direction: column; gap: 10px">
             <ul class="list gap-2">
                 {#each $settingStore.excludedDomains as domain}
@@ -158,7 +158,7 @@
                 {/each}
             </ul>
 
-            <div class="join mt-8 w-full">
+            <div class="join w-full">
                 <div class="w-full">
                     <label class="input validator join-item w-full">
                         <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -176,7 +176,7 @@
         </div>
 
         <div>
-            <h2 class="text-2xl font-bold">Preferences</h2>
+            <h2 class="text-2xl font-bold pb-2">Preferences</h2>
             <ul class="list bg-base-100 rounded-box shadow-md">
                 {#each Object.entries(PREFERENCES) as [key, preference]}
                     <li class="list-row items-center">

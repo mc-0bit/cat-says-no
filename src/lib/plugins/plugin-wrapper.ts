@@ -1,10 +1,11 @@
-import { AllPage } from '@/types/api-response';
+import { Page } from '@/types/api-response';
 import { updatePluginIfOutdated, PluginConfig } from './plugin-config';
 import { MetaData } from './types';
 import { sendMessage } from 'webext-bridge/background';
 import { fetchAllPages } from '../client';
 import { NAMESPACES } from '@/data/namespaces';
 import merge from 'deepmerge';
+import { executePluginCode } from '../helpers/execute-plugin-code';
 
 export class BasePluginWrapper {
     private readonly config: PluginConfig;
@@ -31,7 +32,7 @@ export class BasePluginWrapper {
 export type SearchParams = {
     url: string;
     activeTab: number;
-    data: AllPage[];
+    data: Page[];
     metadata: MetaData;
     linkedom: string;
 };
@@ -43,18 +44,8 @@ export class SearchPluginWrapper extends BasePluginWrapper {
     }
 
     async search({ url, activeTab, metadata, data, linkedom }: SearchParams) {
-        return await sendMessage(
-            'plugin:execute:search',
-            {
-                pluginId: this.id,
-                url,
-                data,
-                metadata,
-                linkedom,
-                code: this.script,
-            },
-            'content-script@' + activeTab,
-        );
+        const searchResult = await executePluginCode({ type: 'search', url, activeTab, metadata, data, linkedom, code: this.script, pluginId: this.id });
+        return searchResult as Page[];
     }
 }
 
@@ -65,21 +56,25 @@ export class SiteMetaDataPluginWrapper extends BasePluginWrapper {
     }
 
     async collectMetadata({ url, activeTab, linkedom }: { url: string; activeTab: number; linkedom: string }) {
-        return await sendMessage(
-            'plugin:execute:metadata',
-            {
-                pluginId: this.id,
-                url,
-                linkedom,
-                code: this.script,
-            },
-            'content-script@' + activeTab,
-        );
+        const metadataResults = await executePluginCode({ type: 'metadata', url, activeTab, linkedom, code: this.script, pluginId: this.id });
+        return metadataResults as MetaData;
+    }
+}
+
+export class DataProviderPluginWrapper extends BasePluginWrapper {
+    readonly type = 'dataprovider';
+    constructor({ config, script }: { config: PluginConfig; script: string }) {
+        super(config, script);
+    }
+
+    async load() {
+        const results: Page[] = [];
+        return results;
     }
 }
 
 class DataStore {
-    readonly data: AllPage[] = [];
+    readonly data: Page[] = [];
     constructor() {}
 
     get(id: number | string) {
@@ -90,7 +85,7 @@ class DataStore {
         return this.data;
     }
 
-    add(page: AllPage) {
+    add(page: Page) {
         if (this.data.some((p) => p.pageid === page.pageid)) {
             console.warn(`Page ${page.pageid} already exists in data store, ignoring...`);
             return;
@@ -98,7 +93,7 @@ class DataStore {
         this.data.push(page);
     }
 
-    addMany(pages: AllPage[]) {
+    addMany(pages: Page[]) {
         for (const page of pages) {
             this.add(page);
         }
@@ -116,10 +111,25 @@ export class PluginWrapperHandler {
     constructor(plugins: PluginConfig[], pluginScripts: Record<string, string>, options: { checkForUpdatesOnStart?: boolean } = {}) {
         this.options = options;
         for (const plugin of plugins) {
-            if (plugin.type === 'search') {
-                this.plugins.push(new SearchPluginWrapper({ config: plugin, script: pluginScripts[plugin.id] }));
-            } else if (plugin.type === 'metadata') {
-                this.plugins.push(new SiteMetaDataPluginWrapper({ config: plugin, script: pluginScripts[plugin.id] }));
+            switch (plugin.type) {
+                case 'search': {
+                    this.plugins.push(new SearchPluginWrapper({ config: plugin, script: pluginScripts[plugin.id] }));
+
+                    break;
+                }
+                case 'metadata': {
+                    this.plugins.push(new SiteMetaDataPluginWrapper({ config: plugin, script: pluginScripts[plugin.id] }));
+
+                    break;
+                }
+                case 'dataprovider': {
+                    this.plugins.push(new SiteMetaDataPluginWrapper({ config: plugin, script: pluginScripts[plugin.id] }));
+
+                    break;
+                }
+                default: {
+                    console.error(`Unknown plugin type: ${plugin.type}`);
+                }
             }
         }
 
@@ -148,9 +158,9 @@ export class PluginWrapperHandler {
 
         /* see TODOs for why this is disabled
         // load data from cache or remote
-        for (const plugin of this.plugins.filter((plugin) => plugin.type === 'data')) {
+        for (const plugin of this.plugins.filter((plugin) => plugin.type === 'dataprovider')) {
             try {
-                let data = await storage.getItem<AllPage[]>(`local:data:${plugin.id}`);
+                let data = await storage.getItem<Page[]>(`local:data:${plugin.id}`);
                 if (data) {
                     this.dataStore.addMany(data);
                     continue;
@@ -184,7 +194,7 @@ export class PluginWrapperHandler {
     }
 
     async search({ url, metadata, activeTab }: { url: string; metadata: MetaData; activeTab: number }) {
-        const results: AllPage[] = [];
+        const results: Page[] = [];
         const searchPlugins = this.plugins.filter((plugin) => plugin.type === 'search').filter((plugin) => plugin.active);
 
         const promiseResult = await Promise.allSettled(
@@ -193,7 +203,7 @@ export class PluginWrapperHandler {
 
         for (const result of promiseResult) {
             if (result.status === 'fulfilled') {
-                results.push(...(result.value as AllPage[]));
+                results.push(...(result.value as Page[]));
             } else {
                 console.error(result.reason);
             }

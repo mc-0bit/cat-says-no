@@ -1,4 +1,4 @@
-import { AllPage } from '@/types/api-response';
+import { Page } from '@/types/api-response';
 
 export type MetaData = {
     shop?: string;
@@ -8,4 +8,4 @@ export type MetaData = {
     custom?: Record<string, unknown>;
 };
 
-export type SearchPluginParams = { url: string; document: Document; data: AllPage[]; metadata: MetaData };
+export type SearchPluginParams = { url: string; document: Document; data: Page[]; metadata: MetaData };

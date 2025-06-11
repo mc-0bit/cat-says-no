@@ -1,23 +1,16 @@
 import { ProtocolWithReturn } from 'webext-bridge';
-import { AllPage } from './api-response';
+import { Page } from './api-response';
 
 declare module 'webext-bridge' {
     export interface ProtocolMap {
-        'settings:open': undefined;
-        'settings:data': { excludedDomains: string[]; plugins: PluginConfig[] };
-        'plugin:execute:search': ProtocolWithReturn<
-            { pluginId: string; url: string; data: AllPage[]; metadata: MetaData; linkedom: string; code: string },
-            AllPage[]
-        >;
-        'plugin:execute:metadata': ProtocolWithReturn<{ pluginId: string; url: string; linkedom: string; code: string }, MetaData>;
-        'toast:show': AllPage[];
+        'toast:show': Page[];
         'tab:open': string;
     }
 }
 
 declare global {
     interface Window {
-        search: (params: SearchPluginParams) => AllPage[];
+        search: (params: SearchPluginParams) => Page[];
     }
 }
 

@@ -1,11 +1,11 @@
 <script lang="ts">
-    import type { AllPage } from '@/types/api-response';
+    import type { Page } from '@/types/api-response';
     import { Readability } from '@mozilla/readability';
     import DOMPurify from 'dompurify';
     import { articleStore } from '@/utils/storage';
     import { sendMessage } from 'webext-bridge/popup';
 
-    let { pages, close }: { pages: AllPage[]; close?: () => void } = $props();
+    let { pages, close }: { pages: Page[]; close?: () => void } = $props();
 
     async function getArticle(pageId: number) {
         const article = $articleStore[pageId];

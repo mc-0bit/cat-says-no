@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { AllPage } from '@/types/api-response';
+    import type { Page } from '@/types/api-response';
     import Results from './Results.svelte';
     import tailwindStyles from '~/assets/styles.css?inline';
 
-    let { data, close, injectStyle = false }: { data: AllPage[]; close: () => void; injectStyle?: boolean } = $props();
+    let { data, close, injectStyle = false }: { data: Page[]; close: () => void; injectStyle?: boolean } = $props();
 
     let pages = $derived($state.snapshot(data).sort((p1, p2) => p1.title.localeCompare(p2.title)));
 

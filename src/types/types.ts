@@ -1,15 +1,16 @@
 import { MetaData } from '@/lib/plugins/types';
-import { AllPage } from './api-response';
+import { Page } from './api-response';
 
 export type PluginExecute =
     | {
           type: 'search';
           pluginId: string;
           url: string;
-          data: AllPage[];
+          data: Page[];
           metadata: MetaData;
           linkedom: string;
           code: string;
+          activeTab: number;
       }
     | {
           type: 'metadata';
@@ -17,4 +18,5 @@ export type PluginExecute =
           url: string;
           linkedom: string;
           code: string;
+          activeTab: number;
       };

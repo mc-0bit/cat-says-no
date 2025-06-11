@@ -1,11 +1,16 @@
 import { sendMessage, onMessage } from 'webext-bridge/background';
-import { getDomainName, isDomainExcluded } from '@/lib/helpers';
+import { getDomainName, isDomainExcluded } from '@/lib/helpers/domain';
 import { PluginWrapperHandler } from '@/lib/plugins/plugin-wrapper';
 import { addPlugin } from '@/lib/plugins/plugin-config';
 import { get } from 'svelte/store';
+import { isUserScriptsAvailable } from '@/lib/helpers/is-user-scripts-available';
 
 export default defineBackground(() => {
     (async () => {
+        if (!isUserScriptsAvailable()) {
+            throw new Error('User scripts are not enabled');
+        }
+
         const plugins = await pluginStorage.getValue();
         const pluginScripts = await pluginScriptStorage.getValue();
 
@@ -38,8 +43,6 @@ export default defineBackground(() => {
 
             const metadata = await pluginWrapperHandler.collectMetadata(tab.url, tab.id);
             const result = await pluginWrapperHandler.search({ url: tab.url, metadata, activeTab: tab.id });
-
-            console.log('result', result);
 
             runtimeStore.set({ currentDomain: domain, results: result });
 

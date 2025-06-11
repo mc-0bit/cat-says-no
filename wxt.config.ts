@@ -10,11 +10,21 @@ let isDevBuild = false;
 export default defineConfig({
     srcDir: 'src',
     modules: ['@wxt-dev/module-svelte'],
-    manifest: () => {
-        return {
-            permissions: ['scripting', 'activeTab', 'storage', 'alarms', 'notifications', 'webNavigation', 'tabs'],
-            host_permissions: ['<all_urls>'],
-        };
+    manifest: (config) => {
+        if (config.browser === 'chrome') {
+            return {
+                permissions: ['scripting', 'activeTab', 'storage', 'alarms', 'notifications', 'webNavigation', 'tabs', 'userScripts'],
+                host_permissions: ['<all_urls>'],
+            };
+        } else if (config.browser === 'firefox') {
+            return {
+                permissions: ['scripting', 'activeTab', 'storage', 'alarms', 'notifications', 'webNavigation', 'tabs'],
+                host_permissions: ['<all_urls>'],
+                optional_permissions: ['userScripts'],
+            };
+        } else {
+            throw new Error('Unsupported browser');
+        }
     },
     webExt: {
         openConsole: true,

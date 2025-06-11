@@ -1,9 +1,9 @@
 import type { PluginConfig } from '@/lib/plugins/plugin-config';
-import { AllPage } from '@/types/api-response';
+import { Page } from '@/types/api-response';
 import { writable } from 'svelte/store';
 import type { StorageItemKey } from 'wxt/utils/storage';
 
-export const dataStorage = storage.defineItem<AllPage[], { lastUpdated: number }>('local:data', {
+export const dataStorage = storage.defineItem<Page[], { lastUpdated: number }>('local:data', {
     fallback: [],
     init: () => [],
 });
@@ -113,7 +113,7 @@ export type Settings = {
     };
 };
 
-export const runtimeStore = createStore<{ currentDomain?: string; results: AllPage[] }>({ currentDomain: undefined, results: [] }, 'session:runtime');
+export const runtimeStore = createStore<{ currentDomain?: string; results: Page[] }>({ currentDomain: undefined, results: [] }, 'session:runtime');
 export const settingStore = createStore<Settings>(
     {
         excludedDomains: [],

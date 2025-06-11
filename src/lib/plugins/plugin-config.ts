@@ -19,7 +19,7 @@ export const pluginConfigSchema = z.object({
     /**
      * Type of plugin
      */
-    type: z.enum(['data', 'metadata', 'search']),
+    type: z.enum(['dataprovider', 'metadata', 'search']),
 
     /**
      * Author name
@@ -102,7 +102,7 @@ export async function addPlugin(sourceUrl: string, active = false) {
 
     const config = validatePluginConfig(data);
 
-    if (config.type === 'data') {
+    if (config.type === 'dataprovider') {
         throw new Error('Data plugins are not supported yet');
     }
 

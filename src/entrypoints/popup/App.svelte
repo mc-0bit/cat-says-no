@@ -1,6 +1,6 @@
 <script lang="ts">
     import Results from '@/lib/components/Results.svelte';
-    import { excludeDomain, removeDomainExclusion } from '@/lib/helpers';
+    import { excludeDomain, removeDomainExclusion } from '@/lib/helpers/domain';
     import { settingStore } from '@/utils/storage';
     import { runtimeStore } from '@/utils/storage';
 
@@ -9,12 +9,12 @@
 </script>
 
 <main class="w-md p-4">
-    {#if domain}
-        {#if !$settingStore.excludedDomains.includes(domain)}
-            <Results {pages}></Results>
-        {/if}
-        <div class="card flex flex-col items-center">
-            <div class="flex flex-col gap-2.5 mt-4">
+    {#if domain && !$settingStore.excludedDomains.includes(domain)}
+        <Results {pages}></Results>
+    {/if}
+    <div class="card flex flex-col items-center">
+        <div class="flex flex-col gap-2.5 mt-4">
+            {#if domain}
                 {#if $settingStore.excludedDomains.includes(domain)}
                     <p class="text-sm font-semibold">This domain is excluded from the results.</p>
                     <button
@@ -31,8 +31,8 @@
                         }}>Exclude this domain</button
                     >
                 {/if}
-                <button class="btn" onclick={() => browser.runtime.openOptionsPage()}>Open Options</button>
-            </div>
+            {/if}
+            <button class="btn" onclick={() => browser.runtime.openOptionsPage()}>Open Options</button>
         </div>
-    {/if}
+    </div>
 </main>

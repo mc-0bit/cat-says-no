@@ -14,6 +14,16 @@ CAT-says-no is a browser extension that alerts you if the website you're current
     - Signature validation for plugin updates
 - Built-in Wiki reader for found entries (powered by Readability.js)
 
+## Notice ⚠️
+
+There is a **very** new Extension API that allows remotely hosted code to be executed. This is part of the Manifest V3 User Script spec and is currently only supported in Chrome. Firefox already supports parts of the `userScripts` API but not the new addition of `userScripts.execute()`. 
+
+With this new API there should be no problems releasing the extension to the extension stores. 
+
+Not everything in this repo has been updated to reflect these changes yet.
+
+Visit the come docs to [enable the userScripts API](https://developer.chrome.com/docs/extensions/reference/api/userScripts#chrome_versions_prior_to_138_developer_mode_toggle).
+
 ## Browser Support
 
 | Browser | Status                                            |
@@ -83,6 +93,8 @@ npm run serve
 - Select the `.output/chrome-mv3` folder
 
 #### Firefox
+
+> ❗❗❗ FIREFOX SUPPORT IS BLOCKED BY `userScripts.execute()` https://bugzilla.mozilla.org/show_bug.cgi?id=1930776 
 
 > ⚠️ Firefox support is experimental and may break.
 
@@ -161,12 +173,14 @@ Thinking about writing a plugin? Check out [Authoring Plugins](./docs/plugins.md
 - [x] (Security) Add signature validation to plugin updates so plugins can only be updated if the signature is valid.
 - [x] Add documentation for plugins -> [docs](./docs/plugins.md)
 - [x] Add proper styling for reader mode e.g. https://oxal.org/projects/sakura/ -> solved by using tailwind typo
+- [ ] Onboarding + permission check
+- [ ] Add article fetching to page alert via message passing.
 - [ ] Better default plugins.
 - [ ] Error handling - there are a ton of places where errors cause the whole extension to become unuseable.
 - [ ] logging
 - [ ] Have someone that actually knows crypto look over the implementation + do some code cleanup.
 - [ ] Evaluate if we should move from simple numbers to a proper versioning system for plugins.
-- [ ] Implement offscreen documents or sandboxed pages for Chrome, and use background pages for Firefox.
+- [ ] Implement offscreen documents or sandboxed pages for Chrome, and use background pages for Firefox. -> obsolete by userScripts?
 - [ ] Data plugins are currently disabled until offscreen documents or sandboxed pages are implemented.
 - [ ] Figure out how dismissing should behave from a user perspective. For example, if a user is on `youtube.com` and dismisses an alert, they likely want it hidden for that site. However, on a marketplace like Amazon, they probably want to be alerted on all listing pages. Additionally, all matches are currently shown. On Amazon, this means that every product page shows matches related to Amazon in general, not the specific product. There should possibly be an option to ignore specific matches.
 - [ ] Workflows for releases / linting
