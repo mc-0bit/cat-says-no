@@ -16,11 +16,11 @@ CAT-says-no is a browser extension that alerts you if the website you're current
 
 ## Notice ⚠️
 
-There is a **very** new Extension API that allows remotely hosted code to be executed. This is part of the Manifest V3 User Script spec and is currently only supported in Chrome. Firefox already supports parts of the `userScripts` API but not the new addition of `userScripts.execute()`. 
+There is a **_very_** new Extension API that allows remotely hosted code to be executed. This is part of the Manifest V3 userscript spec and is currently only supported in Chrome. Firefox already supports parts of the `userScripts` API but not the new addition of `userScripts.execute()`. 
 
 With this new API there should be no problems releasing the extension to the extension stores. 
 
-Not everything in this repo has been updated to reflect these changes yet.
+Not everything in this document has been updated to reflect these changes yet.
 
 Visit the come docs to [enable the userScripts API](https://developer.chrome.com/docs/extensions/reference/api/userScripts#chrome_versions_prior_to_138_developer_mode_toggle).
 
