@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { Page } from '@/types/api-response';
     import Results from './Results.svelte';
-    import tailwindStyles from '~/assets/styles.css?inline';
 
     let { data, close, injectStyle = false }: { data: Page[]; close: () => void; injectStyle?: boolean } = $props();
 
@@ -9,7 +8,6 @@
 
     onMount(() => {
         if (injectStyle) {
-            styleElement!.innerHTML = tailwindStyles;
             // overwrite collapsible height
             styleElement!.innerHTML += /* css */ `
             .collapse:is([open], :focus:not(.collapse-close)) > .collapse-content,
@@ -26,6 +24,4 @@
 <div class="z-[999]">
     <Results {pages} {close}></Results>
     <br />
-    <style bind:this={styleElement}>
-    </style>
 </div>
