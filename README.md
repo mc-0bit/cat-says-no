@@ -22,7 +22,7 @@ With this new API there should be no problems releasing the extension to the ext
 
 Not everything in this document has been updated to reflect these changes yet.
 
-Visit the come docs to [enable the userScripts API](https://developer.chrome.com/docs/extensions/reference/api/userScripts#chrome_versions_prior_to_138_developer_mode_toggle).
+Visit the Chrome docs to learn how to [enable the userScripts API](https://developer.chrome.com/docs/extensions/reference/api/userScripts#chrome_versions_prior_to_138_developer_mode_toggle).
 
 ## Browser Support
 
